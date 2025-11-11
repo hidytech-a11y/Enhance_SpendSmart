@@ -34,7 +34,7 @@ namespace SpendSmart.Controllers
 
         public IActionResult CreateEditExpense(int? id)
         {
-            if(id == null) 
+            if(id != null)   
             {
                 // Editing -> Load an expense by id
                 var expenseInDb = _context.Expenses.SingleOrDefault(Expense => Expense.Id == id);
@@ -61,14 +61,24 @@ namespace SpendSmart.Controllers
             }
             else
             {
-                // Editing
+                // Editing 
                 _context.Expenses.Update(model);
             }
 
-
+             
             _context.SaveChanges();
 
             return RedirectToAction("Expenses");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var expense = _context.Expenses.FirstOrDefault(e => e.Id == id);
+            if (expense == null)
+            {
+                return NotFound();
+            }
+            return View(expense);
         }
 
         public IActionResult Privacy()

@@ -4,6 +4,7 @@ namespace SpendSmart.Models
 {
     public class Expense
     {
+        [Key]
         public int Id { get; set; }
         public decimal Value { get; set; }
 

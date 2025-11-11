@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SpendSmart.Models;
+using SQLitePCL;
 
 namespace SpendSmart
 {
@@ -11,11 +12,24 @@ namespace SpendSmart
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            Batteries.Init();
+
+            // builder.Services.AddDbContext<SpendSmartDbContext>(options =>
+            // options.UseInMemoryDatabase("SpendSmartDb")
+            //    );
 
             builder.Services.AddDbContext<SpendSmartDbContext>(options =>
-            options.UseInMemoryDatabase("SpendSmartDb")
+             options.UseSqlite(builder.Configuration.GetConnectionString("SpendSmartDb"))
                 );
+
             var app = builder.Build();
+
+
+            builder.Services.AddDbContext<UserContext>(options =>
+             options.UseSqlite(builder.Configuration.GetConnectionString("UserDBConnection"))
+             );
+
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
