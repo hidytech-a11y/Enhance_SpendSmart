@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "🚀 Updating SpendSmart on GitHub..."
+git add .
+read -p "📝 Commit message: " msg
+git commit -m "$msg"
+git pull origin main --rebase
+git push origin main
+echo "✅ Update complete!"
