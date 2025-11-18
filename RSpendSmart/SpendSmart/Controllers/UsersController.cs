@@ -100,6 +100,9 @@ namespace SpendSmart.Controllers
             return View(user.Expenses?.ToList() ?? new List<Expense>());
         }
 
+       
+
+
     }
 
 }
